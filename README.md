@@ -5,3 +5,6 @@ VTHacks IV Submssion by
 - Pranav Sukumaran
 - Shiva Thadkamalla
 - Alfred Premkumar
+
+run foodlookup.py like 
+foodlookup.py [FOOD_IMAGE_URL]
