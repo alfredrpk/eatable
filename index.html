@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Can I Eat It?</title>
+</head>
+<body>
+
+<h1>Can I Eat It?</h1>
+<p>Take an image of your food and we'll let you know what allergen info it has</p>
+<input type="file" accept="image/*;capture=camera">
+<video autoplay></video>
+
+<script>
+const constraints = {
+  video: true,
+};
+
+const video = document.querySelector("video");
+
+navigator.mediaDevices.getUserMedia(constraints).then((stream) => {
+  video.srcObject = stream;
+});
+</script>
+
+<video autoplay></video>
+<img src="">
+<canvas style="display:none;"></canvas>
+
+<script>
+const captureVideoButton = document.querySelector(
+  "#screenshot .capture-button"
+);
+const screenshotButton = document.querySelector("#screenshot-button");
+const img = document.querySelector("#screenshot img");
+const video = document.querySelector("#screenshot video");
+
+const canvas = document.createElement("canvas");
+
+captureVideoButton.onclick = function () {
+  navigator.mediaDevices
+    .getUserMedia(constraints)
+    .then(handleSuccess)
+    .catch(handleError);
+};
+
+screenshotButton.onclick = video.onclick = function () {
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  canvas.getContext("2d").drawImage(video, 0, 0);
+  // Other browsers will fall back to image/png
+  img.src = canvas.toDataURL("image/webp");
+};
+
+function handleSuccess(stream) {
+  screenshotButton.disabled = false;
+  video.srcObject = stream;
+}
+</script>
+</body>
+</html>
+
+
+
